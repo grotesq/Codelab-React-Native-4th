@@ -1667,6 +1667,11 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   integrity sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
 
+context-q@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/context-q/-/context-q-1.0.0.tgz#9b05c3f9c462e307e6691b32f1b49bc74f58afd1"
+  integrity sha512-aJP/aG8yGI7JUYY9HQ3ZQQbqLDEjD0owy/YBKtu+gwvRu9soqDeG0VqBh7XsnM9Pot3CICGU3Qb5RvwBqNMbFw==
+
 convert-source-map@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.7.0.tgz#17a2cb882d7f77d3490585e2ce6c524424a3a442"

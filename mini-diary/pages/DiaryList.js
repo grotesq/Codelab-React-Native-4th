@@ -5,6 +5,7 @@ import { FlatList, Text } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+import { withContext } from 'context-q';
 
 const ListItemView = styled.View`
     padding: 8px 16px;
@@ -12,13 +13,16 @@ const ListItemView = styled.View`
     border-bottom-width: 1px;
 `;
 
-const ListItem = props => (
+let ListItem = props => (
     <TouchableOpacity onPress={ props.onPress }>
         <ListItemView>
-            <Text>{ props.item.date } / { props.item.subject }</Text>
+            <Text style={{ fontSize: props.context.fontSize }}>
+                { props.item.date } / { props.item.subject }
+            </Text>
         </ListItemView>
     </TouchableOpacity>
-)
+);
+ListItem = withContext( ListItem );
 
 const DiaryList = props => {
     const [ list, setList ] = React.useState( [] );
@@ -41,6 +45,9 @@ const DiaryList = props => {
                         onPress={ () =>
                             props.navigation.navigate( 'Detail', { id: itemProps.item.id } ) }/> }
                 keyExtractor={ item => item.id }/>
+            <Button onPress={ () => props.navigation.navigate( 'Settings' )}>
+                설정
+            </Button>
         </>
     )
 }
