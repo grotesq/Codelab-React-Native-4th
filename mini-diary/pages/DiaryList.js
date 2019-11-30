@@ -6,6 +6,7 @@ import { NavigationEvents } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import { withContext } from 'context-q';
+import Center from '../components/Center';
 
 const ListItemView = styled.View`
     padding: 8px 16px;
@@ -31,25 +32,38 @@ const DiaryList = props => {
         list = list ? JSON.parse( list ) : [];
         setList( list );
     };
+    React.useEffect( async () => {
+        let value = await AsyncStorage.getItem( 'fontSize' );
+        value = value ? value : '12';
+        props.context.update( {
+            fontSize: value,
+        } );
+    }, [] );
     return (
         <>
             <NavigationEvents
                 onDidFocus={ loadData }
             />
-            <Button onPress={ () => props.navigation.navigate( 'Form' )}>
-                일기 작성
-            </Button>
+            <Center>
+                <Button onPress={ () => props.navigation.navigate( 'Form' )}>
+                    일기 작성
+                </Button>
+            </Center>
             <FlatList data={ list }
                 renderItem={ itemProps =>
                     <ListItem { ...itemProps }
                         onPress={ () =>
                             props.navigation.navigate( 'Detail', { id: itemProps.item.id } ) }/> }
                 keyExtractor={ item => item.id }/>
-            <Button onPress={ () => props.navigation.navigate( 'Settings' )}>
-                설정
-            </Button>
+            <Center>
+                <Button onPress={ () => props.navigation.navigate( 'Settings' )}>
+                    설정
+                </Button>
+            </Center>
         </>
     )
 }
 
-export default DiaryList;
+
+
+export default withContext( DiaryList );
