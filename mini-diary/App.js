@@ -3,9 +3,11 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import DiaryList from './pages/DiaryList';
 import DiaryForm from './pages/DiaryForm';
+import DiaryDetail from './pages/DiaryDetail';
 
 const Navigator = createStackNavigator({
     List: DiaryList,
+    Detail: DiaryDetail,
     Form: DiaryForm,
 });
 

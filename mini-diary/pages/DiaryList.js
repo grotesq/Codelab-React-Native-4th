@@ -13,7 +13,7 @@ const ListItemView = styled.View`
 `;
 
 const ListItem = props => (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={ props.onPress }>
         <ListItemView>
             <Text>{ props.item.date } / { props.item.subject }</Text>
         </ListItemView>
@@ -36,7 +36,10 @@ const DiaryList = props => {
                 일기 작성
             </Button>
             <FlatList data={ list }
-                renderItem={ ListItem }
+                renderItem={ itemProps =>
+                    <ListItem { ...itemProps }
+                        onPress={ () =>
+                            props.navigation.navigate( 'Detail', { id: itemProps.item.id } ) }/> }
                 keyExtractor={ item => item.id }/>
         </>
     )
