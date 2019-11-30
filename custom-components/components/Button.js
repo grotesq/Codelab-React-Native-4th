@@ -7,7 +7,7 @@ const CustomButton = styled.TouchableOpacity`
 const CustomButtonView = styled.View`
   border: 1px solid #e5e5e5;
   padding: 8px 12px;
-  width: 300px;
+  width: ${ props => props.width ? props.width : '300px' };
 `;
 
 const CustomButtonText = styled.Text`
