@@ -7,10 +7,11 @@ import Center from '../components/Center';
 import moment from 'moment';
 import _ from 'underscore';
 import { NavigationEvents } from 'react-navigation';
+import { withContext } from 'context-q';
 
 const firestore = firebaseApp.firestore();
 
-export default function Messages( props ) {
+function Messages( props ) {
   const [ message, setMessage ] = React.useState( '' );
   const [ messages, setMessages ] = React.useState( [] );
   const send = async () => {
@@ -20,6 +21,7 @@ export default function Messages( props ) {
     await firestore.collection( 'messages' ).add( {
       message,
       room_id: props.navigation.state.params.name,
+      user: '익명' + props.context.user.uid.substr(-4),
       created_at: moment().format( 'YYYY-MM-DD HH:mm:ss' ),
     } );
     setMessage( '' );
@@ -60,7 +62,7 @@ export default function Messages( props ) {
       </Center>
       <FlatList
         data={ messages }
-        renderItem={ ({ item }) => <Text>{ item.message }</Text> }
+        renderItem={ ({ item }) => <Text>{ item.user + ' : ' + item.message }</Text> }
       />
     </SafeAreaView>
   );
@@ -74,3 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+Messages = withContext( Messages );
+export default Messages;
